@@ -1,0 +1,73 @@
+CustomerDetails_mySQL
+
+Port: server.port=8080
+http://localhost:8080/customers/
+
+To test the CRUD operations:
+
+Create a Customer (POST):
+
+URL: POST /customers
+Body:
+json
+Copy code
+{
+  "name": "John Doe",
+  "role": {"roleId": 1},
+  "fax": "123456",
+  "address": "123 Street",
+  "locality": "Locality",
+  "city": "City",
+  "number": "9876543210"
+}
+Read a Customer by ID (GET):
+
+URL: GET /customers/{id}
+Read All Customers with Pagination (GET):
+
+URL: GET /customers?page=0&size=10
+Read Customers with Role Name (GET):
+
+URL: GET /customers/custom-roles
+Update a Customer (PUT):
+
+URL: PUT /customers/{id}
+Body: (similar to create)
+Delete a Customer by ID (DELETE):
+
+URL: DELETE /customers/{id}
+
+
+
+
+
+mySQL
+
+CREATE DATABASE UserData1;
+USE UserData1;
+CREATE TABLE role (
+    role_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE customer (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    role_id BIGINT,
+    fax VARCHAR(255),
+    address VARCHAR(255),
+    locality VARCHAR(255),
+    city VARCHAR(255),
+    number VARCHAR(255),
+    FOREIGN KEY (role_id) REFERENCES role(role_id)
+);
+
+
+SELECT * FROM role WHERE role_id = 1;
+INSERT INTO role (role_id, role_name) VALUES 
+(1, 'Manager'), 
+(2, 'Assistant Manager'), 
+(3, 'Team Lead'),
+(4, 'Senior');
+
+SELECT * FROM customer;
+SELECT * FROM role;
